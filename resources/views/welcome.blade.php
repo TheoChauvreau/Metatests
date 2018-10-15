@@ -13,7 +13,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-image: url("https://media2.giphy.com/media/3o72F6tm0Vjk8ZE2Na/giphy.gif");
+                background-size: 100%;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -43,6 +44,7 @@
 
             .content {
                 text-align: center;
+                color: black;
             }
 
             .title {
@@ -50,10 +52,10 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color:black;
+                font-weight: bold;
                 padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
+                font-size: 18px;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;

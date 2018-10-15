@@ -1,0 +1,24 @@
+body {
+    background-image: url("http://walldiskpaper.com/wp-content/uploads/2015/11/New-York-City-Wallpaper-HD.jpg");
+    background-size: 100%;
+}
+
+.devant {
+    margin-top:6em;
+    height: 10em;
+}
+
+a {
+    color: white !important;
+}
+
+h1 {
+    color: white !important;
+    padding-top: 1em;
+    font-size: 5em !important;
+}
+
+.list {
+    font-size: 1.5em !important;
+    padding: 0.5em
+}

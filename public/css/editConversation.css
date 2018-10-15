@@ -1,0 +1,18 @@
+#empty {
+    margin: auto;
+    font-size: 20px;
+}
+
+body {
+    background-image: url("http://www.lemondialdubatiment.com/wp-content/uploads/2017/04/3.jpg");
+    background-size: 100%;
+}
+
+th {
+    background-color: rgba(209, 5, 5, 0.747);
+    border: 1px solid black;
+}
+
+table {
+    border: 1px solid black;
+}
