@@ -22,7 +22,7 @@
                     <div class="col s6 push-s3">
                         <div class="input-field" id='add'>
                             {{csrf_field()}}
-                            <textarea placeholder="Ajouter une proposition de message" style="font-size: 20px;" name='message' form='form' required></textarea>
+                            <textarea placeholder="Ajouter une proposition de message" style="font-size: 20px;" name='message1' form='form' required></textarea>
                         </div>
                         <div class="col s6 push-s4">
                             <label id="monlabel">
@@ -46,12 +46,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script>
         $( document ).ready(function() {
+            var index = 2
                $("#addButton").click(function(){
                    console.log("Lyund")
                    input = document.createElement('textarea')
                    input.setAttribute("placeholder", "Ajouter une autre proposition de message")
                    input.setAttribute("style", "font-size: 20px;")
-                   input.setAttribute("name", "message")
+                   input.setAttribute("name", "message"+index)
+                   index++
                    input.setAttribute("form", "form")
                    input.setAttribute("required", "")
                    $('#add').append(input)

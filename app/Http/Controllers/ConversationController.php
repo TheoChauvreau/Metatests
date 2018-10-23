@@ -123,45 +123,34 @@ class ConversationController extends Controller
 
     public function testConversation($id){
         $i=0;
-        //$received = Conversation::with('messages_received.alt_messages_received')->get();
         $conversation = Conversation::findOrFail($id);
         $messages = $conversation->messages_sent;
         
         foreach($messages as $message){
 
             $messagesV = $conversation->messages_received[$i]->message_received;
-            //dd($received);
             $messagesV2 = $conversation->messages_received[$i];
             $messagesR = $conversation->messages_received[$i]->alt_messages_received;
 
-            //dd ($messagesV2);
-
             $response = $this->replyMessage($message);
-            print_r(nl2br('Message reçu = '.trim($response)."\n"));
+            echo(nl2br('Message reçu = '.trim($response)."\n"));
 
-            
             foreach($messagesR as $messageR){
-                //return $messageR->Message;
                 if(trim($response) == trim($messageR->Message)){
                     if(trim($response) == trim($messagesV)){
-                        echo(nl2br('tout est parfait'."\n"));
+                        echo(nl2br('Test réussi (1ère tentative)'."\n"));
                         } else {
-                            foreach($messagesV2 as $messageV2){ 
-                            if(trim($response) != trim($messagesV)){
+                            while(trim($response) != trim($messagesV)){
                                 $response = $this->replyMessage($message);
-                                if($response == $messagesV){
-                                    echo(nl2br('ça a l\'air bien là'."\n"));
+                                if(trim($response) == trim($messagesV)){
+                                    echo(nl2br('Test réussi (2ème tentative)'."\n"));
                                 }
                             }
-                            }
                         }
-                } else if($response != $messageR->Message){
-                    continue;
-                } else {
-                    echo 'Laisses tomber, le bot ne renvoie pas ce qu\'il faut :/';
+                        break;
                 }
             }
-                $i++;
+        $i++;
     }
 }
     
@@ -196,21 +185,24 @@ class ConversationController extends Controller
 
     public function send_propMessage(){
         $input = Input::all();
-        $newMessage = new alt_message_received;
+        $oust = array_shift($input);
         foreach($input as $message){
-        $newMessage->Message = $input['message'];
-        $newMessage->message_id = $input['id'];
-        if(empty($input['isBot'])){
-            $bot=false;
-        } else {
-            $bot=true;
+            $newMessage = new alt_message_received;
+            if($message == $input["isBot"] || $message == $input["id"]){
+                continue;
+            }
+            $newMessage->Message = $message;
+            $newMessage->message_id = $input['id'];
+            if(empty($input['isBot'])){
+                $bot=false;
+            } else {
+                $bot=true;
+            }
+            $newMessage->Bot = $bot;
+            $newMessage->save();
         }
-        $newMessage->Bot = $bot;
-        $newMessage->save();
-        dd($newMessage->Message);
-    }
         return redirect(route('conversations'));
-}
+    }
 }
 
 
