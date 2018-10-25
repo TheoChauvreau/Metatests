@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin/testConversation/{id}','ConversationController@testConversation')->name('testConversation');
     Route::get('/admin/propositionMessage/{id}','ConversationController@propositionMessage')->name('propositionMessage');
     Route::post('/admin/propositionMessage','ConversationController@send_propMessage')->name('send_propMessage');
+    Route::get('/admin/viewTest','ConversationController@viewTest')->name('viewTest');
 });
 
 

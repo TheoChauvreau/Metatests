@@ -123,9 +123,12 @@ class ConversationController extends Controller
 
     public function testConversation($id){
         $i=0;
+        $index=1;
         $conversation = Conversation::findOrFail($id);
         $messages = $conversation->messages_sent;
-        
+        $tab = array();
+        $turnRep = array();
+
         foreach($messages as $message){
 
             $messagesV = $conversation->messages_received[$i]->message_received;
@@ -133,17 +136,17 @@ class ConversationController extends Controller
             $messagesR = $conversation->messages_received[$i]->alt_messages_received;
 
             $response = $this->replyMessage($message);
-            echo(nl2br('Message reçu = '.trim($response)."\n"));
+            //echo(nl2br('Message reçu = '.trim($response)."\n"));
 
             foreach($messagesR as $messageR){
                 if(trim($response) == trim($messageR->Message)){
                     if(trim($response) == trim($messagesV)){
-                        echo(nl2br('Test réussi (1ère tentative)'."\n"));
+                        $tab[]= "Test réussi (1ère tentative)";
                         } else {
                             while(trim($response) != trim($messagesV)){
                                 $response = $this->replyMessage($message);
                                 if(trim($response) == trim($messagesV)){
-                                    echo(nl2br('Test réussi (2ème tentative)'."\n"));
+                                    $tab[]= "Test réussi (2ème tentative)";
                                 }
                             }
                         }
@@ -152,6 +155,7 @@ class ConversationController extends Controller
             }
         $i++;
     }
+    return view('admin.viewTest', ['tests'=>$tab, 'index'=>$index, 'response'=>$response]);      
 }
     
 
@@ -204,5 +208,3 @@ class ConversationController extends Controller
         return redirect(route('conversations'));
     }
 }
-
-
